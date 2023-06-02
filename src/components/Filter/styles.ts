@@ -20,11 +20,11 @@ export const Container = styled(TouchableOpacity)<FilterStyleProps>`
   justify-content: center;
 `;
 
-export const Title = styled.View`
+export const Title = styled.Text`
   text-transform: uppercase;
   ${({ theme }) => css`
     font-family: ${theme.FONT_FAMILY.BOLD};
     font-size: ${theme.FONT_SIZE.SM}px;
-    cor: ${theme.COLORS.WHITE}
+    color: ${theme.COLORS.WHITE};
   `}
 `
