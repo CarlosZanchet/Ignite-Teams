@@ -1,12 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button } from '@components/Button';
+import { GroupCard } from '@components/GroupCard';
+import { Header } from '@components/Header';
+import { Highlight } from '@components/Highlight';
+import { ListEmpty } from '@components/ListEmpty';
+import { useState } from 'react';
+import { FlatList } from 'react-native';
 import { Container } from './styles';
 
 export function Groups() {
+
+  const [groups, setGroups] = useState<string[]>([])
+
   return (
     <Container>
-      <Text>Groups!</Text>
-      <StatusBar style="auto" />
+        <Header showBackButton />
+        <Highlight title="Titulo Grupo" subtitle='Subtitle group' />
+
+        
+
+        <FlatList  
+          data={groups}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => (
+            <GroupCard 
+              title={item} 
+            />
+          )}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={groups.length === 0 && { flex: 1}}
+          ListEmptyComponent={() => (
+            <ListEmpty message='Que tal cadastrar a primeira turma?' />
+          )}
+        />
+
+        <Button title='Criar Nova Turma' />
     </Container>
   );
 }
