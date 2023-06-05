@@ -8,6 +8,7 @@ interface Props {
 }
 
 export const Container = styled(TouchableOpacity)<Props>`
+  opacity: ${({ disabled }) => disabled ? 0.2 : 1};
   flex: 1;
   min-height: 56px;
   max-height: 56px;

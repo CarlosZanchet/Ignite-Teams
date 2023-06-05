@@ -1,13 +1,13 @@
 import { TouchableOpacityProps } from "react-native";
 import { Container, FilterStyleProps, Title } from "./styles";
 
-interface Props extends TouchableOpacityProps, FilterStyleProps {
+interface Props extends FilterStyleProps, TouchableOpacityProps  {
   title: string
 }
 
-export function Filter({ title, isActive = false, ...rest }: Props) {
+export function Filter({ title, ...rest }: Props) {
   return (
-    <Container isActive>
+    <Container {...rest}>
       <Title>{title}</Title>
     </Container>
   )

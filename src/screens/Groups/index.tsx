@@ -3,8 +3,9 @@ import { GroupCard } from '@components/GroupCard';
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { ListEmpty } from '@components/ListEmpty';
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { groupGetAll } from '@storage/group/groupsGetAll';
+import { useCallback, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { Container } from './styles';
 
@@ -16,10 +17,27 @@ export function Groups() {
     navigation.navigate('new')
   }
 
+  useFocusEffect(useCallback(() => {
+    fetchGroups()
+  }, []))
+
+  async function fetchGroups() {
+    try {
+      const data = await groupGetAll()
+      setGroups(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  function handleOpeGroup(group: string) {
+    navigation.navigate('players', { group })
+  }
+
   return (
     <Container>
         <Header showBackButton />
-        <Highlight title="Título" subtitle='Subtitle group' />
+        <Highlight title="Turmas" subtitle='jogue com a sua turma' />
 
         <FlatList  
           data={groups}
@@ -27,6 +45,7 @@ export function Groups() {
           renderItem={({ item }) => (
             <GroupCard 
               title={item} 
+              onPress={() => handleOpeGroup(item)}
             />
           )}
           showsVerticalScrollIndicator={false}

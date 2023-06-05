@@ -9,6 +9,7 @@ interface Props {
 }
 
 export const Container = styled(TouchableOpacity)`
+  opacity: ${({ disabled }) => disabled ? 0.2 : 1 };
   width: 56px;
   height: 56px;
   justify-content: center;
