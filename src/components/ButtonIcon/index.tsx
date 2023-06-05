@@ -11,7 +11,7 @@ export function ButtonIcon({icon, type = 'PRIMARY' ,...rest}:Props) {
   return (
     <Container {...rest}>
       <Icon 
-        name="home" 
+        name={icon}
         type={type} 
       />
     </Container>
